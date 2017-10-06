@@ -1,5 +1,7 @@
 package com.unveil360.blockchain;
 
+import java.util.Arrays;
+
 /**
  * Created by rawad.elrifai on 10/5/17.
  */
@@ -32,5 +34,11 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int hashCode() {
+        Object[] objects = {System.identityHashCode(this.id), this.name.hashCode()};
+        return Arrays.hashCode(objects);
     }
 }

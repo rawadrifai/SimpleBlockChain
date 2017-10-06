@@ -1,5 +1,7 @@
 package com.unveil360.blockchain;
 
+import java.util.Arrays;
+
 /**
  * Created by rawad.elrifai on 10/5/17.
  */
@@ -7,7 +9,7 @@ public class Transaction {
 
     private Person from;
     private Person to;
-    private int amount;
+    private Integer amount;
 
     public Transaction() {
         this.from = new Person();
@@ -15,7 +17,7 @@ public class Transaction {
         this.amount = 0;
     }
 
-    public Transaction(Person from, Person to, int amount) {
+    public Transaction(Person from, Person to, Integer amount) {
         this.from = from;
         this.to = to;
         this.amount = amount;
@@ -37,11 +39,17 @@ public class Transaction {
         this.to = to;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public int hashCode() {
+        Object[] objects = {from.hashCode(), to.hashCode(), amount.hashCode()};
+        return Arrays.hashCode(objects);
     }
 }

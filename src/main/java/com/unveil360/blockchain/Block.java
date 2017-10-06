@@ -1,6 +1,7 @@
 package com.unveil360.blockchain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by rawad.elrifai on 10/5/17.
@@ -9,27 +10,23 @@ public class Block {
 
     private int previousHash;
     private ArrayList<Transaction> transactions;
-    private int currentHash;
+    //private int currentHash;
+    private String[] trans;
+
+    public Block(int previousHash, String[] trans) {
+
+        this.previousHash = previousHash;
+        this.trans = trans;
+    }
 
     public Block(int previousHash, ArrayList<Transaction> transactions) {
 
         this.previousHash = previousHash;
         this.transactions = transactions;
-        calculateCurrentHash();
-    }
-
-    private void calculateCurrentHash() {
-
-        ArrayList list = new ArrayList();
-        list.add(this.transactions);
-        list.add(this.previousHash);
-
-        this.currentHash = list.hashCode();
     }
 
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
-        calculateCurrentHash();
     }
 
     public int getPreviousHash() {
@@ -48,11 +45,10 @@ public class Block {
         this.transactions = transactions;
     }
 
-    public int getCurrentHash() {
-        return currentHash;
-    }
+    @Override
+    public int hashCode() {
 
-    public void setCurrentHash(int currentHash) {
-        this.currentHash = currentHash;
+        Object[] objects = {transactions.hashCode(), previousHash};
+        return Arrays.hashCode(objects);
     }
 }
