@@ -35,23 +35,38 @@ public class BlockChainTest {
         t4.setTo(p2);
         t4.setAmount(70);
 
+        Ledger ledger = new Ledger();
         ArrayList<Transaction> genesisTransactions = new ArrayList<Transaction>();
         genesisTransactions.add(t1);
         Block genesisBlock = new Block(0, genesisTransactions);
+        ledger.addGenesisBlock(genesisBlock);
+
+        System.out.println(genesisBlock.hashCode());
+        System.out.println(ledger.hashCode());
+        System.out.println("--- 1");
 
         ArrayList<Transaction> b1Transactions = new ArrayList<Transaction>();
         b1Transactions.add(t2);
         b1Transactions.add(t3);
-        Block b1 = new Block(genesisBlock.hashCode(), new ArrayList<Transaction>());
-        //b1.addTransaction(t1);
+        Block b1 = new Block(0, b1Transactions);
+        Ledger.addBlockToLedger(b1);
 
-        Block b2 = new Block(b1.hashCode(), new ArrayList<Transaction>());
-        //b2.addTransaction(t2);
-        System.out.println(t1.hashCode());
-        t1.setAmount(5);
-        System.out.println(t1.hashCode());
-        System.out.println(t1.hashCode());
-        System.out.println(t1.hashCode());
+        System.out.println(ledger.hashCode());
+        System.out.println("--- 2");
+
+        ArrayList<Transaction> b2Transactions = new ArrayList<Transaction>();
+        b2Transactions.add(t4);
+        Block b2 = new Block(0, b2Transactions);
+        Ledger.addBlockToLedger(b2);
+
+        System.out.println(ledger.hashCode());
+        System.out.println("--- 3");
+
+        Ledger.ledger.get(0).getTransactions().get(0).getFrom().setName("something");
+
+        System.out.println(ledger.hashCode());
+        System.out.println("--- 4");
+
     }
 
 }

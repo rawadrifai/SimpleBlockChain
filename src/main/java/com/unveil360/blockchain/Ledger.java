@@ -9,7 +9,16 @@ public class Ledger {
 
     public static ArrayList<Block> ledger = new ArrayList<Block>();
 
-    synchronized public void addBlockToLedger(Block block) {
+    public void addGenesisBlock(Block genesisBlock) {
+        ledger.add(genesisBlock);
+    }
+    synchronized public static void addBlockToLedger(Block block) {
+        block.setPreviousHash(ledger.get(ledger.size()-1).hashCode());
         ledger.add(block);
+    }
+
+    @Override
+    public int hashCode() {
+        return ledger.hashCode();
     }
 }

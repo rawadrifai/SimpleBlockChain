@@ -10,14 +10,6 @@ public class Block {
 
     private int previousHash;
     private ArrayList<Transaction> transactions;
-    //private int currentHash;
-    private String[] trans;
-
-    public Block(int previousHash, String[] trans) {
-
-        this.previousHash = previousHash;
-        this.trans = trans;
-    }
 
     public Block(int previousHash, ArrayList<Transaction> transactions) {
 
